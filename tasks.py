@@ -10,86 +10,33 @@ def load_tasks():
             taskList = json.load(file)
     except FileNotFoundError:
         taskList=[] #Task list is empty if saved one cannot be found
-def show_menu():
-    print("--- To Do List---")
-    print("1. View Tasks")
-    print("2. Add Task")
-    print("3. Complete Task")
-    print("4. Delete Tasks")
-    print("5. Exit")
-def user_choice():
-    while True:
-        show_Menu()
-        userChoice = input("Choose an option: ")
-        match userChoice: #Newly implemented switch statements
-            case "1":
-                print("View Tasks Selected")
-                view_Tasks()
-            case "2":
-                print("Add Task Selected")
-                add_Task()
-            case "3":
-                print("Complete Task Selected")
-                complete_Task()
-            case "4":
-                print("Delete Task Selected")
-                delete_Task()
-            case "5":
-                print("Goodbye")
-                break
-            case _: #Underscore acts as default case signifier
-                print("Invalid choice, try again.")
-def add_task():
-    userTask= { #Dictionary used to track if a task is completed
-        "name":input("Enter your task: ").strip(),
-         "completed":False      }
-    if userTask["name"].strip()=="":
-        print("Task cannot be empty")
+
+def add_task(userTask):
+    userTask=userTask.strip()
+    if userTask=="":
+        return False
     else:
-        taskList.append(userTask)
+        taskList.append({"name":userTask, "completed":False}) #Dictionary used to also store the completion status
         save_tasks()
-        print("Task added successfully")
+        return True
     
-def view_tasks():
-    if len(taskList)==0:
-        print("No tasks yet!")
-    else:
-        print("Current Tasks")
-        for index in range(len(taskList)):
-            if taskList[index]["completed"]:
-                print((index+1),". [x]",taskList[index]["name"])
-            else:
-                print((index+1),". [ ]",taskList[index]["name"])
-    
-def complete_task():
+def complete_task(index):
     if len(taskList)>0:
-        try:
-            taskNum=int(input("Which task number would you like to mark as completed?"))
-        except ValueError:
-            print("Please input a number")
-        else:
-            
-            if taskList[taskNum-1]["completed"]:
-                print("Task is already completed")
-            elif taskNum>0 and taskNum<=len(taskList):
-                taskList[taskNum-1]["completed"] = True
-                print("Task marked as complete!")
-            else:
-                print("Invalid task number put in, please try again")
+        taskList[index]["completed"]=True
+        return True
     else:
-        print("Task list is empty, please try again")
+        return False
         
-def delete_task():
-    if len(taskList)>0:
-        taskNum=int(input("Which task number would you like to remove?"))
-        taskList.pop(taskNum-1)
+def delete_task(index):
+    if len(taskList)>0 and (index>=0 and index<=(len(taskList)-1)):
+        taskList.pop(index)
+        return True
     else:
-        print("Task List is empty")
+        return False
         
 #Program starts here
 taskList=[]
 load_tasks()
-if __name__ == "__main__":
-    user_Choice()
+
 
 

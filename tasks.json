@@ -1,6 +1,10 @@
 [
     {
-        "name": "beep",
+        "name": "Work",
+        "completed": false
+    },
+    {
+        "name": "Dishes",
         "completed": false
     }
 ]
