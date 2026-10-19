@@ -1,13 +1,13 @@
-import json
+import json #Allows data to be stored and retrieved JSON format
 
 def save_tasks():
     with open("tasks.json", "w") as file: #Opens file for writing and creates it if it does not exist. with closes file after operation is completed
-        json.dump(taskList,file,indent=4)
+        json.dump(taskList,file,indent=4) #Converts taskList into JSON format and writes it to a file
 def load_tasks():
-    global taskList
+    global taskList #Ensures taskList is global
     try:
-        with open("tasks.json","r") as file:
-            taskList = json.load(file)
+        with open("tasks.json","r") as file: #Opens file for reading
+            taskList = json.load(file) #Loads file and assigns it to taskList
     except FileNotFoundError:
         taskList=[] #Task list is empty if saved one cannot be found
 
@@ -35,7 +35,6 @@ def delete_task(index):
         return False
         
 #Program starts here
-taskList=[]
 load_tasks()
 
 
