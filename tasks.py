@@ -10,14 +10,14 @@ def load_tasks():
             taskList = json.load(file)
     except FileNotFoundError:
         taskList=[] #Task list is empty if saved one cannot be found
-def show_Menu():
+def show_menu():
     print("--- To Do List---")
     print("1. View Tasks")
     print("2. Add Task")
     print("3. Complete Task")
     print("4. Delete Tasks")
     print("5. Exit")
-def user_Choice():
+def user_choice():
     while True:
         show_Menu()
         userChoice = input("Choose an option: ")
@@ -39,7 +39,7 @@ def user_Choice():
                 break
             case _: #Underscore acts as default case signifier
                 print("Invalid choice, try again.")
-def add_Task():
+def add_task():
     userTask= { #Dictionary used to track if a task is completed
         "name":input("Enter your task: ").strip(),
          "completed":False      }
@@ -50,7 +50,7 @@ def add_Task():
         save_tasks()
         print("Task added successfully")
     
-def view_Tasks():
+def view_tasks():
     if len(taskList)==0:
         print("No tasks yet!")
     else:
@@ -61,7 +61,7 @@ def view_Tasks():
             else:
                 print((index+1),". [ ]",taskList[index]["name"])
     
-def complete_Task():
+def complete_task():
     if len(taskList)>0:
         try:
             taskNum=int(input("Which task number would you like to mark as completed?"))
@@ -79,7 +79,7 @@ def complete_Task():
     else:
         print("Task list is empty, please try again")
         
-def delete_Task():
+def delete_task():
     if len(taskList)>0:
         taskNum=int(input("Which task number would you like to remove?"))
         taskList.pop(taskNum-1)
@@ -89,6 +89,7 @@ def delete_Task():
 #Program starts here
 taskList=[]
 load_tasks()
-user_Choice()
+if __name__ == "__main__":
+    user_Choice()
 
 
