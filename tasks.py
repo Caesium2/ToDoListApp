@@ -30,6 +30,7 @@ def complete_task(index):
 def delete_task(index):
     if len(taskList)>0 and (index>=0 and index<=(len(taskList)-1)):
         taskList.pop(index)
+        save_tasks()
         return True
     else:
         return False

@@ -1,5 +1,5 @@
 import tkinter as tk #Imports Tkinter and shortens the name to tk
-from tkinter import messagebox #Imprts message boxes
+from tkinter import messagebox #Imports message boxes
 
 #Import shared data from main.py
 from tasks import taskList, add_task, complete_task,delete_task
